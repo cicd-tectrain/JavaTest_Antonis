@@ -104,7 +104,7 @@ pipeline {
 
         stage('Test intergration branch') {
             when {
-                branch 'integration'
+                branch 'intergration'
                 beforeAgent true
             }
 
@@ -115,7 +115,7 @@ pipeline {
 
         stage('Deploy intergration branch') {
             when {
-                branch 'integration'
+                branch 'intergration'
                 beforeAgent true
             }
 
