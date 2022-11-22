@@ -19,6 +19,8 @@ pipeline {
 
       steps {
         echo 'Building feature'
+        sh 'ls -la'
+        sh 'gradle build -x test'
       }
     }
 
@@ -28,8 +30,17 @@ pipeline {
               beforeAgent true
             }
 
+    //Agent overwrite and run in a docker container
+      agent {
+        docker {
+            image 'gradle:7.5.1-jdk17-focal'
+        }
+      }
+
+
       steps {
         echo 'Testing feature'
+        sh 'gradle test'
       }
     }
 
