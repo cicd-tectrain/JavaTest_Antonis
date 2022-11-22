@@ -42,6 +42,15 @@ pipeline {
         echo 'Testing feature'
         sh 'gradle test'
       }
+
+      //post-build
+      post {
+        always {
+            //collect JUnit test  results
+            junit 'build/test-results/**/*.xml'
+        }
+      }
+
     }
 
     stage('Integrating Feature') {
