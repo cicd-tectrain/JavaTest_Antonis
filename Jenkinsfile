@@ -41,6 +41,7 @@ pipeline {
       steps {
         echo 'Testing feature'
         sh 'gradle test'
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'build/reports/tests/test/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
       }
 
       //post-build
