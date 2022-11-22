@@ -4,10 +4,10 @@ pipeline {
   agent any
   stages {
     stage('Building Feature') {
-      /*when {
+      when {
               branch 'feature/*'
               beforeAgent true
-            }*/
+            }
 
       steps {
         echo 'Building feature'
@@ -15,10 +15,10 @@ pipeline {
     }
 
     stage('Testing Feature') {
-      /* when {
+      when {
               branch 'feature *//*'
               beforeAgent true
-            } */
+            }
 
       steps {
         echo 'Testing feature'
@@ -26,10 +26,10 @@ pipeline {
     }
 
     stage('Integrating Feature') {
-      /*when {
+      when {
         branch 'feature/*'
         beforeAgent true
-      }*/
+      }
 
       steps {
         echo 'Integrating feature'
