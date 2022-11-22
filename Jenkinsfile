@@ -3,22 +3,12 @@
 pipeline {
   agent any
 
-  environment {
-    INTEGRATION_BRANCH = 'intergration'
+
+
+    //create environment
+    environment {
+        INTEGRATION_BRANCH = 'intergration'
     }
-
-
-  stages {
-
-    stage('Log Environment') {
-        steps {
-            echo "local branch: ${BRANCH_NAME}"
-            echo "Integration branch: ${INTEGRATION_BRANCH}"
-        }
-
-    }
-
-
 
     stage('Building Feature') {
       when {
@@ -94,5 +84,45 @@ pipeline {
             }
     }
 
+    // ====== Integration Stages ======
+    stage('Build integration branch') {
+        when {
+            branch 'intergration'
+            beforeAgent true
+        }
+
+        //Agent overwrite and run in a docker container
+        agent {
+            docker {
+                image 'gradle:7.5.1-jdk17-focal'
+            }
+        }
+
+        steps {
+            echo 'Building integration'
+        }
+    }
+
+    stage('Test intergration branch') {
+        when {
+            branch 'integration'
+            beforeAgent true
+        }
+
+        steps {
+            echo 'Testing integration'
+        }
+    }
+
+    stage('Deploy intergration branch') {
+        when {
+            branch 'integration'
+            beforeAgent true
+        }
+
+        steps {
+            echo 'Deploying integration'
+        }
+    }
   }
 }
