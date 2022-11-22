@@ -9,6 +9,14 @@ pipeline {
               beforeAgent true
             }
 
+      //Agent overwrite and run in a docker container
+      agent {
+        docker {
+            image '7.5.1-jdk17-focal'
+        }
+      }
+
+
       steps {
         echo 'Building feature'
       }
