@@ -150,10 +150,10 @@ pipeline {
                 ]],
                 credentialsId: 'nexus_credentials',
                 groupId: '',
-                nexusUrl: 'nexus:8081/repository',
+                nexusUrl: 'nexus:8081',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
-                repository: 'maven-snapshots',
+                repository: 'repository/maven-snapshots',
                 version: '0.0.1-SNAPSHOT'
             }
         }
