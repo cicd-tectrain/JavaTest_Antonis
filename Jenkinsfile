@@ -145,12 +145,12 @@ pipeline {
                 nexusArtifactUploader artifacts: [[
                     artifactId: 'at.tectrain.cicd',
                     classifier: '',
-                    file: 'demo-0.0.1-SNAPSHOT.jar',
+                    file: 'build/libs/demo-0.0.1-SNAPSHOT.jar',
                     type: 'jar'
                 ]],
-                credentialsId: '',
-                groupId: 'xx',
-                nexusUrl: 'nexus:8081',
+                credentialsId: 'nexus_credentials',
+                groupId: '',
+                nexusUrl: 'nexus:8081/repository/maven-snapshots/',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'maven-snapshots',
