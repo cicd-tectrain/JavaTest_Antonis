@@ -16,7 +16,7 @@ pipeline {
 
     stage('Testing Feature') {
       when {
-              branch 'feature *//*'
+              branch 'feature/*'
               beforeAgent true
             }
 
