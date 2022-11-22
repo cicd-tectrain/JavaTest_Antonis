@@ -6,6 +6,7 @@ pipeline {
     //create environment
     environment {
         INTEGRATION_BRANCH = 'intergration'
+        PRODUCTION_BRANCH = 'master'
     }
 
   stages{
@@ -80,7 +81,7 @@ pipeline {
                   ]) {
                         sh 'git push origin ${INTEGRATION_BRANCH}'
                   }
-                }
+          }
         }
 
         // ====== Integration Stages ======
@@ -99,6 +100,8 @@ pipeline {
 
             steps {
                 echo 'Building integration'
+                sh 'ls -la'
+                sh 'gradle clean build -x test'
             }
         }
 
@@ -108,8 +111,16 @@ pipeline {
                 beforeAgent true
             }
 
+            //Agent overwrite and run in a docker container
+            agent {
+                docker {
+                    image 'gradle:7.5.1-jdk17-focal'
+                }
+            }
+
             steps {
                 echo 'Testing integration'
+                sh 'gradle test'
             }
         }
 
@@ -121,6 +132,16 @@ pipeline {
 
             steps {
                 echo 'Deploying integration'
+                sh 'ls -la'
+                sh 'git branch -a'
+                sh 'git checkout ${BRANCH_NAME}'
+                sh 'git checkout ${PRODUCTION_BRANCH}'
+                sh 'git merge ${BRANCH_NAME}'
+                withCredentials ([
+                    gitUsernamePassword(credentialsId: 'github_cicd_pat', gitToolName: 'Default')
+                ]) {
+                sh 'git push origin ${PRODUCTION_BRANCH}'
+                    }
             }
         }
   }
