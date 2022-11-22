@@ -132,6 +132,12 @@ pipeline {
                 beforeAgent true
             }
 
+            agent {
+                docker {
+                    image 'gradle:7.5.1-jdk17-focal'
+                }
+            }
+
             steps {
                 echo 'Publishing artifacts'
                 sh 'ls -la'
