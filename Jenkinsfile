@@ -2,7 +2,24 @@
 
 pipeline {
   agent any
+
+  environment {
+    INTEGRATION_BRANCH = 'intergration'
+    }
+
+
   stages {
+
+    stage('Log Environment') {
+        steps {
+            echo "local branch: ${BRANCH_NAME}"
+            echo "Integration branch: ${INTEGRATION_BRANCH}"
+        }
+
+    }
+
+
+
     stage('Building Feature') {
       when {
               branch 'feature/*'
@@ -20,7 +37,7 @@ pipeline {
       steps {
         echo 'Building feature'
         sh 'ls -la'
-        sh 'gradle build -x test'
+        sh 'gradle clean build -x test'
       }
     }
 
