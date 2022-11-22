@@ -174,7 +174,7 @@ pipeline {
         }
 
         stage ('Merge integration into master')
-
+        {
             when {
                 branch 'intergration'
                 beforeAgent true
