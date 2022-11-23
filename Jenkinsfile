@@ -344,7 +344,7 @@ pipeline {
 
 
                 //build testing image using docker compose
-                sh 'docker compose build testing'
+                sh 'docker compose build production'
 
                 //login at nexus docker registry
                 sh 'echo $NEXUS_PSW > pw.txt'
