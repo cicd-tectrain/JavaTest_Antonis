@@ -3,7 +3,7 @@ services:
   production:
     image: nexus:5000/cicd/production
     build:
-      dockerfile: Dockerfile
+      dockerfile: docker/production/Dockerfile
       context: ../..
     ports:
       - "8091:8080"
