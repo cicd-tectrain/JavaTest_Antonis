@@ -311,11 +311,11 @@ pipeline {
                 ]],
                 credentialsId: 'nexus_credentials',
                 groupId: '',
-                nexusUrl: 'nexus:8081/repository/maven-snapshots',
+                nexusUrl: 'nexus:8081/repository/maven-releases',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: '',
-                version: '1.0.1-SNAPSHOT'
+                version: '0.0.1-SNAPSHOT'
             }
         }
 
