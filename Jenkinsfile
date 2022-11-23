@@ -200,6 +200,8 @@ pipeline {
                 //push image to registry
                 sh 'docker compose push testing'
 
+                //redeploy testing container
+                sh 'docker compose up -d --force-recreate testing'
             }
 
             //post: logout docker
