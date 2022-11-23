@@ -74,6 +74,7 @@ pipeline {
                   sh 'ls -la'
                   sh 'git branch -a'
                   sh 'git checkout ${BRANCH_NAME}'
+                  sh 'git pull'
                   sh 'git checkout ${INTEGRATION_BRANCH}'
                   sh 'git merge ${BRANCH_NAME}'
                   withCredentials ([
@@ -227,6 +228,7 @@ pipeline {
                 sh 'ls -la'
                 sh 'git branch -a'
                 sh 'git checkout ${BRANCH_NAME}'
+                sh 'git pull'
                 sh 'git checkout ${PRODUCTION_BRANCH}'
                 sh 'git merge ${BRANCH_NAME}'
                 withCredentials ([
@@ -284,7 +286,7 @@ pipeline {
         }
 
 
-        stage ('Publish artifacts') {
+        stage ('Publish production artifacts') {
 
             when {
                 branch 'master'
