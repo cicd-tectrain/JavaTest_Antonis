@@ -171,6 +171,9 @@ pipeline {
                 sh 'docker info'
 
                 sh 'docker compose version'
+
+                //build testing image using docker compose
+                sh 'docker compose build testing'
             }
 
         }
