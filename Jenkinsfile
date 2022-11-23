@@ -183,7 +183,6 @@ pipeline {
                 unstash 'build'
                 sh 'ls -la build'
 
-
                 //display info about docker
                 sh 'docker info'
                 sh 'docker compose version'
