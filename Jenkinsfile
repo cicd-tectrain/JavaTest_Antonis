@@ -179,7 +179,7 @@ pipeline {
                 echo 'Deploying integration'
 
                 //unstash build directory
-                unstash 'build/'
+                unstash 'build'
                 sh 'ls -la build'
 
 
@@ -193,7 +193,7 @@ pipeline {
                 sh 'docker compose build testing'
 
                 //login at nexus docker registry
-                sh 'docker login --user $NEXUS_USR --password $NEXUS_PSW nexus:5000'
+                sh 'docker login --username $NEXUS_USR --password $NEXUS_PSW nexus:5000'
             }
 
             //post: logout docker
