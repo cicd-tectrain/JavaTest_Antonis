@@ -1,0 +1,9 @@
+services:
+
+  testing:
+    image: nexus:5000/cicd/testing
+    build:
+      dockerfile: Dockerfile
+      context: ../..
+    ports:
+      - "8090:8080"

@@ -1,0 +1,9 @@
+services:
+
+  production:
+    image: nexus:5000/cicd/production
+    build:
+      dockerfile: Dockerfile
+      context: ../..
+    ports:
+      - "8091:8080"

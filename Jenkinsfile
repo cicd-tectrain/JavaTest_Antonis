@@ -187,22 +187,24 @@ pipeline {
                 //display info about docker
                 sh 'docker info'
                 sh 'docker compose version'
-                sh 'docker compose config'
 
+                dir('docker/testing') {
 
-                //build testing image using docker compose
-                sh 'docker compose build testing'
+                    sh 'docker compose config'
+                    //build testing image using docker compose
+                    sh 'docker compose build testing'
 
-                //login at nexus docker registry
-                sh 'echo $NEXUS_PSW > pw.txt'
-                sh 'cat pw.txt'
-                sh 'echo $NEXUS_PSW | docker login --username $NEXUS_USR --password-stdin nexus:5000'
+                    //login at nexus docker registry
+                    sh 'echo $NEXUS_PSW > pw.txt'
+                    sh 'cat pw.txt'
+                    sh 'echo $NEXUS_PSW | docker login --username $NEXUS_USR --password-stdin nexus:5000'
 
-                //push image to registry
-                sh 'docker compose push testing'
+                    //push image to registry
+                    sh 'docker compose push testing'
 
-                //redeploy testing container
-                sh 'docker compose up -d --force-recreate testing'
+                    //redeploy testing container
+                    sh 'docker compose up -d --force-recreate testing'
+                }
             }
 
             //post: logout docker
@@ -340,22 +342,30 @@ pipeline {
                 //display info about docker
                 sh 'docker info'
                 sh 'docker compose version'
-                sh 'docker compose config'
+
+                //alternative
+                //sh 'cd docker/production'
+                //use this directory
+                dir('docker/production') {
+
+                    sh 'docker compose config'
+                    //build testing image using docker compose
+                    sh 'docker compose build production'
+
+                    //login at nexus docker registry
+                    sh 'echo $NEXUS_PSW > pw.txt'
+                    sh 'cat pw.txt'
+                    sh 'echo $NEXUS_PSW | docker login --username $NEXUS_USR --password-stdin nexus:5000'
+
+                    //push image to registry
+                    sh 'docker compose push production'
+
+                    //redeploy testing container
+                    sh 'docker compose up -d --force-recreate production'
+                }
 
 
-                //build testing image using docker compose
-                sh 'docker compose build production'
 
-                //login at nexus docker registry
-                sh 'echo $NEXUS_PSW > pw.txt'
-                sh 'cat pw.txt'
-                sh 'echo $NEXUS_PSW | docker login --username $NEXUS_USR --password-stdin nexus:5000'
-
-                //push image to registry
-                sh 'docker compose push production'
-
-                //redeploy testing container
-                sh 'docker compose up -d --force-recreate production'
             }
 
             //post: logout docker
