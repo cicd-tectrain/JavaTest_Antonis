@@ -353,8 +353,6 @@ pipeline {
                     sh 'docker compose build production'
 
                     //login at nexus docker registry
-                    sh 'echo $NEXUS_PSW > pw.txt'
-                    sh 'cat pw.txt'
                     sh 'echo $NEXUS_PSW | docker login --username $NEXUS_USR --password-stdin nexus:5000'
 
                     //push image to registry
