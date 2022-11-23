@@ -193,10 +193,20 @@ pipeline {
                 sh 'docker compose build testing'
 
                 //login at nexus docker registry
-                sh 'docker login --username $NEXUS_USR --password $NEXUS_PSW nexus:5000'
+                sh 'echo $NEXUS_PSW | docker login --username $NEXUS_USR --password-stdin nexus:5000'
+
+                //push image to registry
+                sh 'docker compose push testing'
+
             }
 
             //post: logout docker
+            post {
+                always {
+                    sh 'docker logout nexus:5000'
+                    //delete /var/jenkins_home/.docker/config.json
+                }
+            }
 
         }
 
