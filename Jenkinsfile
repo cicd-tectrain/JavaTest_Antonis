@@ -311,7 +311,7 @@ pipeline {
                 ]],
                 credentialsId: 'nexus_credentials',
                 groupId: '',
-                nexusUrl: 'nexus:8081/repository/maven-releases',
+                nexusUrl: 'nexus:8081/repository/maven-snapshots',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: '',
