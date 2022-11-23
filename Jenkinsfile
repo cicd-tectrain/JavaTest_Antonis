@@ -179,7 +179,7 @@ pipeline {
                 echo 'Deploying integration'
 
                 //unstash build directory
-                unstash 'build'
+                unstash 'build/'
                 sh 'ls -la build'
 
 
